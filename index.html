@@ -1,0 +1,52 @@
+<html>
+<body>
+<script>
+Notification.requestPermission().then((permission) => {
+      if (permission === "granted") {
+        console.log("Notification User Permission Granted.");
+ 
+        if ('serviceWorker' in navigator) {
+
+          navigator.serviceWorker.ready.then(function (registration) {
+console.log(registration);
+            registration.pushManager.subscribe({
+              userVisibleOnly: true,
+              applicationServerKey: "BN-cmpjpXPT1fYxcP1ks1U-mPNkEVWarGFEoflACHFvWjCLfXgupxvxd4VwQajjnzd0qSnHnqDp1DfOmqhc49LE"
+            }).then(function (subscription) {
+              // Here 'subscription' contains the necessary information
+              console.log('subscription1', JSON.stringify(subscription));
+ 
+              const endpoint = subscription.endpoint;
+              const p256dh = subscription.getKey('p256dh');
+              const auth = subscription.getKey('auth');
+              console.log('endpoint',endpoint)
+              console.log('p256dh',p256dh)
+ 
+              console.log('auth',auth)
+ 
+            }).catch(function (err) {
+              console.error('Failed to subscribe: ', err);
+            });
+          });
+        } else {
+          console.log('Service Worker is not supported in this browser');
+        }
+        // return getToken(messaging, { vapidKey: `BEcl7qWulspsLmZkLsVombDIZZ9J3_NAcQwd8TVkTzlSlh_igELEJARCV2GcgKmM4QlCvBwpGvOiHd8WeBJLppM` })
+        //   .then((currentToken) => {
+        //     if (currentToken) {
+        //       console.log('Client Token: ', currentToken);
+        //     } else {
+        //       console.log('Failed to generate the app registration token.');
+        //     }
+        //   })
+        //   .catch((err) => {
+        //     console.log('An error occurred when requesting to receive the token.', err);
+        //   });
+      } else {
+ 
+        console.log("User Permission Denied.");
+      }
+    });
+</script>
+</body>
+</html>
