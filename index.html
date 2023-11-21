@@ -25,17 +25,17 @@
             const endpoint = subscription.endpoint;
             const p256dh = subscription.getKey('p256dh');
             const auth = subscription.getKey('auth');
-            console.log('Endpoint:', endpoint);
-            console.log('P256DH:', p256dh ? btoa(String.fromCharCode.apply(null, new Uint8Array(p256dh))) : null);
-            console.log('Auth:', auth ? btoa(String.fromCharCode.apply(null, new Uint8Array(auth))) : null);
+            alert(endpoint);
+            alert(p256dh ? btoa(String.fromCharCode.apply(null, new Uint8Array(p256dh))) : null);
+            alert(auth ? btoa(String.fromCharCode.apply(null, new Uint8Array(auth))) : null);
           } else {
-            console.error('Service Worker is not supported in this browser');
+            alert('Service Worker is not supported in this browser');
           }
         } else {
-          console.log("User Permission Denied.");
+          alert("User Permission Denied.");
         }
       } catch (error) {
-        console.error('Failed to subscribe to push notifications:', error);
+        alert('Failed to subscribe to push notifications:');
       }
     }
   </script>
