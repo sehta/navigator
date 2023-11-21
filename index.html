@@ -41,8 +41,8 @@
                                 const endpoint = subscription.endpoint;
                                 const p256dh = subscription.getKey("p256dh");
                                 const auth = subscription.getKey("auth");
-                                alert(endpoint);
-                                alert(
+                                console.log(endpoint);
+                                console.log(
                                   p256dh
                                     ? btoa(
                                         String.fromCharCode.apply(
@@ -52,7 +52,7 @@
                                       )
                                     : null
                                 );
-                                alert(
+                                console.log(
                                   auth
                                     ? btoa(
                                         String.fromCharCode.apply(
