@@ -1,10 +1,13 @@
 // service-worker.js
 
 self.addEventListener('push', function(event) {
-  console.log("EVENT",event);
+  console.log('Received a push event', event);
+
+  const pushData = event.data ? event.data.text() : 'No payload';
+
   const options = {
-    body: event.data.text(),
-    icon: 'path/to/icon.png', // Replace with your icon path
+    body: pushData,
+    icon: 'path/to/icon.png',
     data: {
       // You can include custom data for the notification
       // Example: id, link, etc.
@@ -13,5 +16,12 @@ self.addEventListener('push', function(event) {
 
   event.waitUntil(
     self.registration.showNotification('Push Notification', options)
+      .then(() => {
+        console.log('Notification displayed successfully');
+      })
+      .catch((error) => {
+        console.error('Notification display error:', error);
+      })
   );
 });
+
