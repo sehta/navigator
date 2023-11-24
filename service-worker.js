@@ -1,6 +1,7 @@
 // service-worker.js
 
 self.addEventListener('push', function(event) {
+  console.log("EVENT",event);
   const options = {
     body: event.data.text(),
     icon: 'path/to/icon.png', // Replace with your icon path
@@ -11,6 +12,7 @@ self.addEventListener('push', function(event) {
   };
 
   event.waitUntil(
+     console.log("waitUntil");
     self.registration.showNotification('Push Notification', options)
   );
 });
