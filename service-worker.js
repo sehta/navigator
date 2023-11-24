@@ -12,7 +12,6 @@ self.addEventListener('push', function(event) {
   };
 
   event.waitUntil(
-     console.log("waitUntil");
     self.registration.showNotification('Push Notification', options)
   );
 });
