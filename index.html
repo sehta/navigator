@@ -90,6 +90,49 @@
                           console.error("Failed to unsubscribe:", error);
                         });
                     }
+                    else
+                    {
+                      registration.pushManager
+                              .subscribe({
+                                // Include your new applicationServerKey here
+                                applicationServerKey:
+                                  urlBase64ToUint8Array(
+          'BEcl7qWulspsLmZkLsVombDIZZ9J3_NAcQwd8TVkTzlSlh_igELEJARCV2GcgKmM4QlCvBwpGvOiHd8WeBJLppM',
+        ),
+                                userVisibleOnly: true,
+                              })
+                              .then(function (subscription) {
+                                // Handle the new subscription
+                                console.log("New subscription:", subscription);
+                                const endpoint = subscription.endpoint;
+                                const p256dh = subscription.getKey("p256dh");
+                                const auth = subscription.getKey("auth");
+                                console.log(endpoint);
+                                console.log(
+                                  p256dh
+                                    ? btoa(
+                                        String.fromCharCode.apply(
+                                          null,
+                                          new Uint8Array(p256dh)
+                                        )
+                                      )
+                                    : null
+                                );
+                                console.log(
+                                  auth
+                                    ? btoa(
+                                        String.fromCharCode.apply(
+                                          null,
+                                          new Uint8Array(auth)
+                                        )
+                                      )
+                                    : null
+                                );
+                              })
+                              .catch(function (error) {
+                                console.error("Failed to subscribe:", error);
+                              });
+                    }
                   });
               });
             } else {
